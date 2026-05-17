@@ -1,5 +1,4 @@
 import { Classifications } from '@mediapipe/tasks-vision';
-import { NullLiteral } from 'typescript';
 
 export interface ExpressionMetrics{
     smile: number;

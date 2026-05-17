@@ -17,7 +17,6 @@ export const App: FC = () => {
   const faceLandmarkerRef = useRef<FaceLandmarker | null>(null);
   const animationFrameRef = useRef<number>(0);
   const lastTimestampRef = useRef<number>(0);
-  const lastTimeStampRef = useRef<number>(0);
 
   const [metrics, setMetrics] = useState<ExpressionMetrics | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -114,23 +113,15 @@ export const App: FC = () => {
         lastTimelineSampleRef.current = now;
 		setEngagementHistory((prev) => {
           const next = [...prev, expressionMetrics.expressiveness,];
-		  if (
-            next.length >
-            TIMELINE_MAX_POINTS
-          ) {
-            return next.slice(
-              next.length -
-                TIMELINE_MAX_POINTS
-            );
+		  if ( next.length > TIMELINE_MAX_POINTS) {
+            return next.slice(next.length - TIMELINE_MAX_POINTS);
           }
-
           return next;
         });
       }
     }
 
-    animationFrameRef.current =
-      requestAnimationFrame(processFrame);
+    animationFrameRef.current =requestAnimationFrame(processFrame);
   }, [showMesh]);
 
   useEffect(() => {
@@ -139,31 +130,22 @@ export const App: FC = () => {
 
     return () => {
       if (animationFrameRef.current) {
-        cancelAnimationFrame(
-          animationFrameRef.current
-        );
+        cancelAnimationFrame(animationFrameRef.current);
       }
-
-      if (faceLandmarkerRef.current) {
-        faceLandmarkerRef.current.close();
+      if (faceLandmarkerRef.current) { 
+		faceLandmarkerRef.current.close();
       }
     };
-  }, [
-    initializeFaceLandmarker,
-    startCamera,
-  ]);
+  }, [initializeFaceLandmarker,startCamera,]);
 
   useEffect(() => {
     if (!isLoading && !error) {
-      animationFrameRef.current =
-        requestAnimationFrame(processFrame);
+      animationFrameRef.current = requestAnimationFrame(processFrame);
     }
 
     return () => {
       if (animationFrameRef.current) {
-        cancelAnimationFrame(
-          animationFrameRef.current
-        );
+        cancelAnimationFrame( animationFrameRef.current );
       }
     };
   }, [isLoading, error, processFrame]);
