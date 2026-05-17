@@ -1,10 +1,10 @@
 import { FaceLandmarkerResult, DrawingUtils, FaceLandmarker } from '@mediapipe/tasks-vision';
 
-export const drawLandmarks = {
+export const drawLandmarks = (
 	ctx: CanvasRenderingContext2D,
 	result: FaceLandmarkerResult,
 	videoElement: HTMLVideoElement
-} => {
+ ) => {
 	const width = ctx.canvas.width;
 	const height = ctx.canvas.height;
 

@@ -12,9 +12,9 @@ export interface ExpressionMetrics{
     }
 }
 
-export function computeExpressuionMetrics{
-    blendshapres: Classifications[]
-}: ExpressionbMetrics | null {
+export function computeExpressionMetrics(
+    blendshapes: Classifications[]
+): ExpressionMetrics | null {
     if (!blendshapes || blendshapes.length ===0 ){
         return null;
     }
